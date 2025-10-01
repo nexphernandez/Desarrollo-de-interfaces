@@ -1,13 +1,16 @@
 
-String descodificar(String codigo){
-  var mensaje = codigo.codeUnits;
-  var solucion =[];
-  for(var numero in mensaje){
-    solucion.add(String.fromCharCode(numero -3));
+List<int> pasarANumeros(String codigo){
+  return codigo.codeUnits;
+}
+
+String pasarAFrase(List<int> codigoInt) {
+  List<int> codigoFinal=[];
+  for (var i = 0; i < codigoInt.length; i++) {
+    codigoFinal.add(codigoInt[i] - 3);
   }
-  return solucion.join();
+  return String.fromCharCodes(codigoFinal);
 }
 void main(){
   String codigo = "Zlqjduglxp#Ohylrvd";
-  print(descodificar(codigo));
+  print(pasarAFrase(pasarANumeros(codigo)));
 }
