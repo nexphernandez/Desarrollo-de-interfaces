@@ -43,38 +43,46 @@ class MyHomePage extends StatelessWidget {
         .watch<MyAppState>(); // ← ?? Lo entenderemos más adelante
     final pair = appState.current;
     return Scaffold(
-      body: Column(
-        children: [
-          Text('A random idea:'),
-          BigData(pair: pair),
-          ElevatedButton(
-            onPressed: () {
-              appState.getNext();
-            },
-            child: Text("Siguiente"),
-          ),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('A random idea:'),
+            BigData(pair: pair),
+            SizedBox(height: 20,),
+            ElevatedButton(
+              onPressed: () {
+                appState.getNext();
+              },
+              child: Text("Siguiente"),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
 class BigData extends StatelessWidget {
-  const BigData({
-    super.key,
-    required this.pair,
-  });
+  const BigData({super.key, required this.pair});
 
   final WordPair pair;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final wordStyle = Theme.of(
+      context,
+    ).textTheme.displayMedium!.copyWith(color: theme.colorScheme.onPrimary);
     return Card(
       color: theme.colorScheme.primary,
       child: Padding(
         padding: const EdgeInsets.all(20),
-        child: Text(pair.asLowerCase),
+        child: Text(
+          pair.asLowerCase,
+          style: wordStyle,
+          semanticsLabel: "${pair.first} ${pair.second}",
+        ),
       ),
     );
   }
