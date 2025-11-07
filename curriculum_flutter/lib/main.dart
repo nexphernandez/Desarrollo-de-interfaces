@@ -23,7 +23,9 @@ class CVPage extends StatelessWidget {
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Columna izquierda (Morada) - 33% del ancho
+          // ===========================
+          // ==== COLUMNA IZQUIERDA ====
+          // ===========================
           Expanded(
             flex: 33,
             child: Container(
@@ -32,26 +34,24 @@ class CVPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Imagen de perfil
-                  Center(
+                  // FOTO
+                  Align(
+                    alignment: Alignment.centerLeft,
                     child: Container(
                       width: 250,
                       height: 250,
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.3),
-                        // Ya no usamos borderRadius en el contenedor exterior, para que el marco sea cuadrado
                       ),
                       child: Container(
-                        padding: EdgeInsets.all(
-                          5,
-                        ), // Espacio entre la imagen y el borde
+                        padding: EdgeInsets.all(5),
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: Color(0xFF7B68B8), // El color del borde
-                            width: 3, // El grosor del borde
+                            color: Color(0xFF7B68B8),
+                            width: 3,
                           ),
                         ),
-                        child: ClipRRect(
+                        child: ClipRect(
                           child: Image.asset(
                             'assets/profile.png',
                             fit: BoxFit.cover,
@@ -68,8 +68,6 @@ class CVPage extends StatelessWidget {
                     ),
                   ),
 
-
-
                   SizedBox(height: 25),
 
                   // CONTACTO
@@ -77,21 +75,12 @@ class CVPage extends StatelessWidget {
                   SizedBox(height: 18),
                   ContactItem(icon: Icons.phone, text: '(55) 1234-5678'),
                   SizedBox(height: 8),
-                  ContactItem(
-                    icon: Icons.email,
-                    text: 'hola@sitioincreible.com',
-                  ),
+                  ContactItem(icon: Icons.email, text: 'hola@sitioincreible.com'),
                   SizedBox(height: 8),
-                  ContactItem(
-                    icon: Icons.language,
-                    text: 'www.sitioincreible.com',
-                  ),
+                  ContactItem(icon: Icons.language, text: 'www.sitioincreible.com'),
 
                   SizedBox(height: 30),
-
-                  // Línea divisoria
-                  Container(height: 1.5, color: Colors.white.withOpacity(0.4)),
-
+                  Container(height: 1.5, color: Color(0xFFB4A5D5)),
                   SizedBox(height: 20),
 
                   // HABILIDADES
@@ -110,10 +99,7 @@ class CVPage extends StatelessWidget {
                   SkillItem(text: 'Trabajo en equipo'),
 
                   SizedBox(height: 30),
-
-                  // Línea divisoria
-                  Container(height: 1.5, color: Colors.white.withOpacity(0.4)),
-
+                  Container(height: 1.5, color: Color(0xFFB4A5D5)),
                   SizedBox(height: 20),
 
                   // EDUCACIÓN
@@ -135,144 +121,130 @@ class CVPage extends StatelessWidget {
             ),
           ),
 
-          // Columna derecha (Blanca) - 67% del ancho
+          // ========================
+          // ==== COLUMNA DERECHA ===
+          // ========================
           Expanded(
             flex: 67,
             child: SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.fromLTRB(50, 50, 50, 40),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Nombre con fondo morado
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 15,
-                      ),
-                      decoration: BoxDecoration(
+                padding: EdgeInsets.fromLTRB(0, 50, 40, 40), 
+                // ↑ derecha y abajo con padding, pero izquierda queda limpia
+                child: Padding(
+                  padding: EdgeInsets.only(left: 40), 
+                  // ↑ padding global aplicado SOLO a la columna derecha
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+
+                      // ========= BLOQUE MORADO DEL NOMBRE =========
+                      Container(
+                        width: double.infinity,
                         color: Color(0xFFB4A5D5),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Napolitani',
-                            style: TextStyle(
-                              fontSize: 52,
-                              fontWeight: FontWeight.w300,
-                              color: Color(0xFF7B68B8),
-                              height: 1.0,
-                              letterSpacing: 1,
-                            ),
-                          ),
-                          Text(
-                            'Mariana',
-                            style: TextStyle(
-                              fontSize: 52,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF7B68B8),
-                              height: 1.1,
-                              letterSpacing: 1,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    SizedBox(height: 35),
-
-                    SizedBox(height: 25),
-
-                    // ACERCA DE MÍ
-                    SectionTitleRight(title: 'A C E R C A  D E  M Í'),
-                    SizedBox(height: 12),
-                    Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nulla facilisi morbi tempus iaculis urna id volutpat lacus.',
-                      style: TextStyle(
-                        fontSize: 13.5,
-                        height: 1.55,
-                        color: Colors.black87,
-                      ),
-                    ),
-
-                    SizedBox(height: 30),
-
-                    // Línea divisoria
-                    Container(
-                      height: 1.5,
-                      color: Color(0xFFB4A5D5).withOpacity(0.3),
-                    ),
-
-                    SizedBox(height: 25),
-
-                    // EXPERIENCIA LABORAL
-                    SectionTitleRight(
-                      title: 'E X P E R I E N C I A  L A B O R A L',
-                    ),
-                    SizedBox(height: 18),
-
-                    Row(
-                      children: [
-                        // Línea vertical con puntos decorativos
-                        SizedBox(
-                          width: 40,
-                          height: 450,
-                          child: Stack(
-                            alignment: Alignment.center,
+                        padding: EdgeInsets.symmetric(vertical: 30),
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 50),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Línea vertical continua
-                              Container(width: 2, color: Color(0xFFB4A5D5)),
-                              // Puntos decorativos a lo largo de la línea
-                              Positioned(top: 30, child: CircleDot()),
-                              Positioned(top: 135, child: CircleDot()),
-                              Positioned(top: 245, child: CircleDot()),
-                              Positioned(top: 345, child: CircleDot()),
+                              Text(
+                                'Mariana',
+                                style: TextStyle(
+                                  fontSize: 70,
+                                  fontWeight: FontWeight.w300,
+                                  color: Color(0xFF7B68B8),
+                                ),
+                              ),
+                              Text(
+                                'Napolitani',
+                                style: TextStyle(
+                                  fontSize: 52,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF7B68B8),
+                                ),
+                              ),
                             ],
                           ),
                         ),
-                        Column(
-                          children: [
-                            ExperienceItem(
-                              position: 'Creadora de contenido',
-                              years: '2010-2012',
-                              company: 'Agencia de Marketing Digital',
-                              description:
-                                  'Eu augue ut lectus arcu bibendum at varius vel pharetra vel turpis nunc eget lorem dolor sed viverra ipsum nunc.',
-                            ),
-                            SizedBox(height: 22),
+                      ),
 
-                            ExperienceItem(
-                              position: 'Creadora de contenido',
-                              years: '2010-2012',
-                              company: 'Agencia de Marketing Digital',
-                              description:
-                                  'Eu augue ut lectus arcu bibendum at varius vel pharetra vel turpis nunc eget lorem dolor sed viverra ipsum nunc.',
-                            ),
-                            SizedBox(height: 22),
+                      SizedBox(height: 35),
 
-                            ExperienceItem(
-                              position: 'Creadora de contenido',
-                              years: '2010-2012',
-                              company: 'Agencia de Marketing Digital',
-                              description:
-                                  'Eu augue ut lectus arcu bibendum at varius vel pharetra vel turpis nunc eget lorem dolor sed viverra ipsum nunc.',
-                            ),
-                            SizedBox(height: 22),
+                      // ACERCA DE MÍ
+                      SectionTitleRight(title: 'A C E R C A  D E  M Í'),
+                      SizedBox(height: 12),
 
-                            ExperienceItem(
-                              position: 'Creadora de contenido',
-                              years: '2010-2012',
-                              company: 'Agencia de Marketing Digital',
-                              description:
-                                  'Eu augue ut lectus arcu bibendum at varius vel pharetra vel turpis nunc eget lorem dolor sed viverra ipsum nunc.',
-                            ),
-                          ],
+                      Text(
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                        style: TextStyle(
+                          fontSize: 13.5,
+                          height: 1.55,
+                          color: Color(0xFF7B68B8),
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+
+                      SizedBox(height: 30),
+
+                      Container(
+                        height: 1.5,
+                        color: Color(0xFFB4A5D5),
+                      ),
+
+                      SizedBox(height: 25),
+
+                      // EXPERIENCIA LABORAL
+                      SectionTitleRight(
+                        title: 'E X P E R I E N C I A  L A B O R A L',
+                      ),
+                      SizedBox(height: 18),
+
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 40,
+                            height: 450,
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Container(width: 2, color: Color(0xFFB4A5D5)),
+                                Positioned(top: 30, child: CircleDot()),
+                                Positioned(top: 135, child: CircleDot()),
+                                Positioned(top: 245, child: CircleDot()),
+                                Positioned(top: 345, child: CircleDot()),
+                              ],
+                            ),
+                          ),
+                          Column(
+                            children: [
+                              ExperienceItem(
+                                company: 'Agencia de Marketing Digital',
+                                position: 'Creadora de contenido',
+                                years: '2010-2012',
+                                description:
+                                    'Eu augue ut lectus arcu bibendum at varius vel pharetra vel turpis nunc eget lorem dolor sed viverra ipsum nunc.',
+                              ),
+                              SizedBox(height: 22),
+                              ExperienceItem(
+                                company: 'Agencia de Marketing Digital',
+                                position: 'Creadora de contenido',
+                                years: '2010-2012',
+                                description:
+                                    'Eu augue ut lectus arcu bibendum at varius vel pharetra vel turpis nunc eget lorem dolor sed viverra ipsum nunc.',
+                              ),
+                              SizedBox(height: 22),
+                              ExperienceItem(
+                                company: 'Agencia de Marketing Digital',
+                                position: 'Creadora de contenido',
+                                years: '2010-2012',
+                                description:
+                                    'Eu augue ut lectus arcu bibendum at varius vel pharetra vel turpis nunc eget lorem dolor sed viverra ipsum nunc.',
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -283,7 +255,10 @@ class CVPage extends StatelessWidget {
   }
 }
 
-// Widget para los puntos circulares en la línea vertical
+// ============================================================
+// COMPONENTES VISUALES
+// ============================================================
+
 class CircleDot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -299,7 +274,8 @@ class CircleDot extends StatelessWidget {
   }
 }
 
-// Widgets para columna izquierda (morada)
+// COLUMNA IZQUIERDA
+
 class SectionTitle extends StatelessWidget {
   final String title;
 
@@ -328,33 +304,21 @@ class ContactItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment:
-          MainAxisAlignment.start, // Alinea el contenido a la izquierda
-      crossAxisAlignment: CrossAxisAlignment.center, // Centra verticalmente
       children: [
-        // Fondo circular solo alrededor del ícono
         Container(
-          padding: EdgeInsets.all(10), // Espaciado dentro del contenedor
+          padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: Color(0xFF7B68B8), // Fondo morado
-            shape: BoxShape.circle, // Forma circular
+            color: Color(0xFF7B68B8),
+            shape: BoxShape.circle,
           ),
-          child: Icon(
-            icon,
-            color: Colors
-                .white, // El icono será blanco para que contraste con el fondo
-            size: 16, // Tamaño del icono
-          ),
+          child: Icon(icon, color: Colors.white, size: 16),
         ),
-        SizedBox(width: 8), // Espaciado entre el icono y el texto
+        SizedBox(width: 8),
         Text(
           text,
           style: TextStyle(
-            fontSize: 12.5, // Tamaño del texto
-            color: Color(
-              0xFF7B68B8,
-            ), // El color del texto será blanco para contraste
-            height: 1.4,
+            fontSize: 12.5,
+            color: Color(0xFF7B68B8),
           ),
         ),
       ],
@@ -369,9 +333,28 @@ class SkillItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(fontSize: 12.5, color: Color(0xFF7B68B8), height: 1.3),
+    return Row(
+      children: [
+        Container(
+          width: 6,
+          height: 6,
+          margin: EdgeInsets.only(top: 6, right: 10),
+          decoration: BoxDecoration(
+            color: Color(0xFF7B68B8),
+            shape: BoxShape.circle,
+          ),
+        ),
+        Expanded(
+          child: Text(
+            text,
+            style: TextStyle(
+              fontSize: 12.5,
+              color: Color(0xFF7B68B8),
+              height: 1.3,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -389,34 +372,78 @@ class EducationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const double bulletSize = 6.0;
+    const double bulletGap = 10.0;
+    const double indent = bulletSize + bulletGap; // = 16
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.bold,
-            color: Color(0xFF7B68B8),
-            height: 1.3,
-          ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: bulletSize,
+              height: bulletSize,
+              margin: EdgeInsets.only(top: 5, right: bulletGap),
+              decoration: BoxDecoration(
+                color: Color(0xFF7B68B8),
+                shape: BoxShape.circle,
+              ),
+            ),
+            Expanded(
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF7B68B8),
+                  height: 1.3,
+                ),
+              ),
+            ),
+          ],
         ),
-        SizedBox(height: 4),
-        Text(
-          institution,
-          style: TextStyle(fontSize: 12, color: Color(0xFF7B68B8), height: 1.3),
-        ),
-        SizedBox(height: 2),
-        Text(
-          years,
-          style: TextStyle(fontSize: 12, color: Color(0xFF7B68B8), height: 1.3),
+
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(width: indent),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 4),
+                  Text(
+                    institution,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF7B68B8),
+                      height: 1.3,
+                    ),
+                  ),
+                  SizedBox(height: 2),
+                  Text(
+                    years,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF7B68B8),
+                      height: 1.3,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ],
     );
   }
 }
 
-// Widgets para columna derecha (blanca)
+
+// COLUMNA DERECHA
+
 class SectionTitleRight extends StatelessWidget {
   final String title;
 
@@ -455,12 +482,20 @@ class ExperienceItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
+          company,
+          style: TextStyle(
+            fontSize: 13.5,
+            fontWeight: FontWeight.bold,
+            color: Color.fromARGB(255, 81, 68, 126),
+          ),
+        ),
+        SizedBox(height: 8),
+        Text(
           position,
           style: TextStyle(
             fontSize: 14.5,
             fontWeight: FontWeight.bold,
             color: Color(0xFF7B68B8),
-            height: 1.2,
           ),
         ),
         SizedBox(height: 3),
@@ -470,23 +505,16 @@ class ExperienceItem extends StatelessWidget {
             fontSize: 12.5,
             color: Color(0xFF7B68B8),
             fontWeight: FontWeight.w600,
-            height: 1.2,
-          ),
-        ),
-        SizedBox(height: 8),
-        Text(
-          company,
-          style: TextStyle(
-            fontSize: 13.5,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-            height: 1.3,
           ),
         ),
         SizedBox(height: 6),
         Text(
           description,
-          style: TextStyle(fontSize: 12.5, color: Colors.black87, height: 1.5),
+          style: TextStyle(
+            fontSize: 12.5,
+            color: Color(0xFF7B68B8),
+            height: 1.5,
+          ),
         ),
       ],
     );
