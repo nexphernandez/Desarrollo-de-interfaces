@@ -8,99 +8,115 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const FirstPage(),
       debugShowCheckedModeBanner: false,
+      home: const ScientistsPage(),
     );
   }
 }
 
-class FirstPage extends StatelessWidget {
-  const FirstPage({super.key});
+class Scientist {
+  String name;
+  String imageUrl;
+  String description;
+  Scientist({
+    required this.name,
+    required this.imageUrl,
+    required this.description,
+  });
+}
+
+class ScientistsPage extends StatelessWidget {
+  const ScientistsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final List<Scientist> cientificos = [
+      Scientist(
+        name: "Galileo Galilei",
+        imageUrl:
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Justus_Sustermans_-_Portrait_of_Galileo_Galilei%2C_1636.jpg/640px-Justus_Sustermans_-_Portrait_of_Galileo_Galilei%2C_1636.jpg',
+        description:
+            "Galileo Galilei formuló la relatividad galileana, donde no existe el movimiento absoluto.",
+      ),
+      Scientist(
+        name: "Isaac Newton",
+        imageUrl:
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Portrait_of_Sir_Isaac_Newton%2C_1689.jpg/640px-Portrait_of_Sir_Isaac_Newton%2C_1689.jpg',
+        description:
+            "Isaac Newton usó las ideas de Galileo para crear la física clásica, en la que el espacio y el tiempo son absolutos.",
+      ),
+      Scientist(
+        name: "Albert Einstein",
+        imageUrl:
+            'https://upload.wikimedia.org/wikipedia/commons/d/d3/Albert_Einstein_Head.jpg',
+        description:
+            "Albert Einstein usó la física de Newton para desarrollar la relatividad, donde el espacio y el tiempo no son absolutos, sino que dependen del movimiento del observador.",
+      ),
+    ];
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Fotos historicas')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: GestureDetector(
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => SecondPage()),
-            ),
-            child: Hero(
-              tag: "HeroImagen",
-              child: Column(
-                children: [
-                  Text(
-                    "Bienvenido 👋",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    "Toca la tarjeta para ver mas detalles en otra pantalla",
-                  ),
-                  SizedBox(height: 60),
-                  ClipRRect(
-                    borderRadius: BorderRadiusGeometry.circular(16),
-                    child: Image.asset(
-                      "assets/images/berlin.png",
-                      width: 300,
-                      height: 130,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ],
+      appBar: AppBar(title: const Text('Físicos Ilustres')),
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: cientificos.map((cientifico) {
+            return GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ScientistDetailPage(scientist: cientifico),
+                ),
               ),
-            ),
-          ),
+              child: Hero(
+                tag: cientifico.name,
+                child: ClipRRect(child: Image.network(cientifico.imageUrl,width: 200,) ),
+              ),
+            );
+          }).toList(),
         ),
       ),
     );
   }
 }
 
-class SecondPage extends StatelessWidget {
-  const SecondPage({super.key});
+class ScientistDetailPage extends StatelessWidget {
+  final Scientist scientist;
+
+  const ScientistDetailPage({super.key, required this.scientist});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Pantalla 2')),
-      body: SingleChildScrollView(
+      appBar: AppBar(title: Text(scientist.name)),
+      body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: GestureDetector(
-          onTap: () => Navigator.pop(context, true),
-          child: Hero(
-            tag: "demoHero",
-            child: Column(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadiusGeometry.circular(16),
-                  child: Image.asset(
-                    "assets/images/berlin.png",
-                    width: double.infinity,
-                    height: 430,
-                    fit: BoxFit.cover,
-                  ),
+        child: Center(
+          child: Column(
+            children: [
+              GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Hero(
+                  tag: scientist.name,
+                  child: Image.network(scientist.imageUrl,width: 300,),
                 ),
-                Text(
-                  "Konrad Schuman",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 20),
+
+              Text(
+                scientist.name,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                 ),
-                const Text(
-                  'La imagen muestra a Konrad Schumann, un joven guardia de Alemania Oriental, '
-                  'en el instante en que salta sobre el alambre fronterizo que marcaba el '
-                  'inicio de la construcción del Muro de Berlín, levantado por la Alemania comunista, '
-                  'para escapar hacia Berlín Oeste en 1961.',
-                  textAlign: TextAlign.justify,
-                ),
-                OutlinedButton(
-                  onPressed: () => Navigator.pop(context, true),
-                  child: Text("Volver"),
-                ),
-              ],
-            ),
+                textAlign: TextAlign.center,
+              ),
+
+              Text(
+                scientist.description,
+                style: const TextStyle(fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
         ),
       ),
