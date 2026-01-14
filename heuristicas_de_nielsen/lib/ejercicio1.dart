@@ -27,6 +27,7 @@ class _LoadingExampleState extends State {
   Future loadData() async {
     setState(() {
       isLoading = true;
+      message = "";
     });
 
     // Simula una operación lenta (por ejemplo, cargar datos)
